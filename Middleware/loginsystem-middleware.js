@@ -14,3 +14,16 @@ export const Middleware = async (req, res, next) => {
         next();
     })
 }
+export const roleBasemiddleware = (...allroles)=>{
+    return(async (req,res,next)=>{
+try{
+if(!allroles.includes(req.user.role)){
+    return res.status(403).json({message:"You are not authorized"})
+}
+next();
+}
+catch(error){
+res.status(500).json(error.message)
+}
+    })
+}
