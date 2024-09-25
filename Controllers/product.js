@@ -104,3 +104,14 @@ export const getProductsByUserId = async (request, response) => {
         return response.status(500).json(error.message)
     }
 };
+// Filter products by category
+export const getProductsByCategory = async (req, res) => {
+  const { category } = req.query;
+
+  try {
+      const products = await product.find({ category });
+      res.status(200).json(products);
+  } catch (err) {
+      res.status(500).json({ message: 'Error fetching products', error: err.message });
+  }
+};

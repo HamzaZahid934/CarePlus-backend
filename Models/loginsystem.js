@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-
+import mongoose from "mongoose";
+import crypto from "crypto";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -12,7 +12,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
-   
   },
   password: {
     type: String,
@@ -21,10 +20,15 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['customer','admin','superadmin'],
-    default: 'customer'
-}
+    enum: ["customer", "admin", "superadmin"],
+    default: "customer",
+  },
+  resetToken: {
+    type: String,
+  }, 
+  resetTokenExpiry: {
+     type: Date }, 
 });
 
-const auth = mongoose.model('Logintest', userSchema);
-export default auth
+const auth = mongoose.model("Logintest", userSchema);
+export default auth;
