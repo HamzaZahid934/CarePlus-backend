@@ -8,6 +8,8 @@ import userRoute from "./Routes/User-Routes.js";
 import productRoute from "./Routes/product-Routes.js";
 import cookieParser from "cookie-parser";
 import AuthRoutes from "./Routes/loginsystem-Route.js"
+import path from "path";
+import { fileURLToPath } from "url";
 dotenv.config;
 
 const app = express();
@@ -17,10 +19,19 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 app.use(cookieParser())
+//user route
 app.use("/", userRoute);
+//product route
 app.use("/", productRoute)
+//Login route
 app.use("/",AuthRoutes)
 
+//for server Image response
+const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const __dirname = path.dirname(__filename); // get the name of the directory
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
+
+//port listening 
 const PORT = process.env.PORT || 5000;
 connectdb();
 app.listen(PORT, () => {

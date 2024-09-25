@@ -26,6 +26,9 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+    },
     user: {
       ref: user,
       type: mongoose.Schema.Types.ObjectId,

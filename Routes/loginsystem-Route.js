@@ -8,6 +8,6 @@ import { Middleware, roleBasemiddleware } from "../Middleware/loginsystem-middle
 
 router.post("/signup", SignupUser)
 router.post("/authlogin" ,Loginuser)
-router.post("/logout",Middleware,roleBasemiddleware(['customer','admin','Manager']),Logoutuser)
+router.post("/logout",Middleware,roleBasemiddleware('customer','admin','superadmin'),Logoutuser)
 
 export default router

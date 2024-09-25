@@ -3,7 +3,8 @@ import product from "../Models/product-model.js";
 export const postProductData = async (req, res) => {
   try {
     const { name, description, price, quantity, user } = req.body;
-    console.log(name, description, price, quantity);
+    const image = request.file && request.file.filename;
+    console.log(name, description, price, quantity,image);
     const isProductExisted = await product.findOne({ name: name });
     if (isProductExisted) {
       return res.status(400).json({ message: "Product is already existed" });
@@ -14,7 +15,8 @@ export const postProductData = async (req, res) => {
       description,
       price,
       quantity,
-      user
+      user,
+      image,
     });
 
     await productData.save();
