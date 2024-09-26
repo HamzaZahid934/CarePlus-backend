@@ -1,4 +1,4 @@
-import FAQ from "../Models/faq-model";
+import FAQ from "../Models/faq-model.js";
 
 // Get all FAQs
 export const getFAQs = async (req, res) => {

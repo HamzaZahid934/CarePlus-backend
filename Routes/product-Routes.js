@@ -6,6 +6,7 @@ import {
   getProductsData,
   postProductData,
   updateProductData,
+  getProductsByCategory
 } from "../Controllers/product.js";
 
 const productRoute = express.Router();
