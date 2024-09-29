@@ -2,9 +2,8 @@ import user from "../Models/user-model.js";
 
 export const postUserData = async (req, res) => {
   try {
-    const { name, userName, password, email } = req.body;
-    const image = req.file && req.file.filename;
-    console.log(name, email, password, userName,image);
+    const { name,  password, email } = req.body;
+    console.log(name, email, password);
     const isEmailExisted = await user.findOne({ email: email });
     if (isEmailExisted) {
       return res.status(400).json({ message: "Email is already existed" });
@@ -12,10 +11,8 @@ export const postUserData = async (req, res) => {
 
     const userData = user({
       name,
-      userName,
       email,
       password,
-      image
     });
 
     await userData.save();
@@ -59,9 +56,8 @@ export const updateUserData = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const { name, userName, password, email } = req.body;
+    const { name, password, email } = req.body;
     userData.name = name;
-    userData.userName = userName;
     userData.password = password;
     userData.email = email;
 

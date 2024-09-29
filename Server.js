@@ -12,7 +12,8 @@ import cartRoutes from "./Routes/cart-Routes.js";
 import checkoutRoutes from "./Routes/checkout-Routes.js";  
 import reviewRoutes from "./Routes/review-Routes.js";  
 import faqRoutes from "./Routes/faq-Routes.js";
-import passwordResetRoutes from "./Routes/passwordreset-Routes.js";   
+import passwordResetRoutes from "./Routes/passwordreset-Routes.js";
+import categoryRoute from "./Routes/category-Routes.js";   
 import path from "path";
 import { fileURLToPath } from "url";
 dotenv.config;
@@ -42,6 +43,8 @@ app.use("/reviews", reviewRoutes);
 app.use("/faqs", faqRoutes); 
 //password reset route
 app.use("/", passwordResetRoutes);
+//category routes
+app.use("/", categoryRoute);
 
 //for server Image response
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -49,7 +52,7 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
 //port listening 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 connectdb();
 app.listen(PORT, () => {
   console.log(`Server is running`);

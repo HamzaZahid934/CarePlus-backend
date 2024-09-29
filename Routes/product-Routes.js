@@ -9,10 +9,13 @@ import {
   getProductsByCategory
 } from "../Controllers/product.js";
 
+import { Middleware } from "../Middleware/loginsystem-middleware.js"; 
+import upload from "../Utils/helper.js";
+
 const productRoute = express.Router();
 
 //create
-productRoute.post("/createproduct", postProductData);
+productRoute.post("/createproduct",Middleware,upload.single('image'), postProductData);
 //fetch
 productRoute.get("/get", getProductsData);
 productRoute.get("/get/:id", getProductById);

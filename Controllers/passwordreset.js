@@ -1,7 +1,9 @@
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';  
 import bcrypt from 'bcryptjs';
+import dotenv from "dotenv";
 import User from '../Models/loginsystem.js';  
+dotenv.config;
 
 // Send password reset link
 export const requestPasswordReset = async (req, res) => {
@@ -26,7 +28,10 @@ export const requestPasswordReset = async (req, res) => {
 
         // Send email
         const transporter = nodemailer.createTransport({
+            host: 'gsmtp.gmail.com',
             service: 'Gmail',  // or another email service
+            port: 587,
+            secure: false,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
