@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import user from "./user-model.js";
+import Category from "./category-model.js";
 
 const productSchema = new mongoose.Schema(
   {
@@ -23,11 +24,9 @@ const productSchema = new mongoose.Schema(
       type: String,
     },
     category: {
-      type: String,
-      required: true,
-    },
-    image: {
-      type: String,
+      ref :Category,
+      type:mongoose.Schema.Types.ObjectId
+      
     },
     user: {
       ref: user,

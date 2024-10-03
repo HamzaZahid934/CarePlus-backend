@@ -1,15 +1,19 @@
 import mongoose from 'mongoose';
 
+// Define the allowed categories using an enum
+const allowedCategories = ['PetFoods', 'DogTreats', 'LitterCare', 'RawDogFood', 'Crates&Beds','OutdoorGear','PuppyFood','DietDogFood'];
+
 const categorySchema = new mongoose.Schema({
-    title: {
+    name: {
         type: String,
+        enum: allowedCategories,  // Restrict values to the allowed categories
         required: true,
-    },
+      },
     subtitle: {
         type: String,
         required: true,
     },
-    imageUrl: {
+    image: {
         type: String,
         required: true,  // If you are handling images
     }

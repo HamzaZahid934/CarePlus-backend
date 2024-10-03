@@ -19,6 +19,9 @@ import { fileURLToPath } from "url";
 dotenv.config;
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 app.use(cors());
 app.use(express.json());
@@ -26,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 app.use(cookieParser())
 
-
+app.use('/Uploads', express.static(path.join(__dirname, 'Uploads')));
 //user route
 app.use("/", userRoute);
 //product route
@@ -46,10 +49,8 @@ app.use("/", passwordResetRoutes);
 //category routes
 app.use("/", categoryRoute);
 
-//for server Image response
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-const __dirname = path.dirname(__filename); // get the name of the directory
-app.use('/upload', express.static(path.join(__dirname, 'upload')));
+ // get the name of the directory
+
 
 //port listening 
 const PORT = process.env.PORT || 8000;

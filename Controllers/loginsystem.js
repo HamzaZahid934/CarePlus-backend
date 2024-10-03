@@ -8,6 +8,7 @@ dotenv.config()
 export const SignupUser=async(req,res)=>{
 try {
     const {username, email, password}=req.body;
+    console.log(req.body)
     const hashpassword=await bcrypt.hash(password,10)
     const loginUser=new Logintest({username, email, password: hashpassword})
     await loginUser.save();

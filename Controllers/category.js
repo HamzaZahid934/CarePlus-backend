@@ -3,17 +3,17 @@ import Category from "../Models/category-model.js";
 // Add a new category
 export const addCategory = async (req, res) => {
     try {
-        const { title, subtitle } = req.body;
-        const imageUrl = req.file ? req.file.filename : null;  // Handle image upload
+        const { name, subtitle } = req.body;
+        const image =req.file.path || null;  // Handle image upload
 
-        if (!title || !subtitle || !imageUrl) {
+        if (!name || !subtitle || !image) {
             return res.status(400).json({ message: "Missing required fields" });
         }
 
         const category = new Category({
-            title,
+            name,
             subtitle,
-            imageUrl
+            image:image
         });
 
         await category.save();

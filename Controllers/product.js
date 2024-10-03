@@ -1,9 +1,10 @@
 import product from "../Models/product-model.js";
 
+
 export const postProductData = async (req, res) => {
   try {
-    const { name, description, price, quantity, user } = req.body;
-    const image = request.file && request.file.filename;
+    const { name, description, price, quantity, user,category } = req.body;
+    const image =req.file.path || null;
     console.log(name, description, price, quantity,image);
     const isProductExisted = await product.findOne({ name: name });
     if (isProductExisted) {
@@ -17,6 +18,7 @@ export const postProductData = async (req, res) => {
       quantity,
       user,
       image,
+      category
     });
 
     await productData.save();
@@ -27,6 +29,19 @@ export const postProductData = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
+
+//new added get prducts by categories
+export const getproductsbyCategory = async (req, res) => {
+  try {
+    const products = await product.find({ categoryId: req.params.categoryId });
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+
 
 export const getProductsData = async (req, res) => {
   try {
@@ -104,14 +119,4 @@ export const getProductsByUserId = async (request, response) => {
         return response.status(500).json(error.message)
     }
 };
-// Filter products by category
-export const getProductsByCategory = async (req, res) => {
-  const { category } = req.query;
 
-  try {
-      const products = await product.find({ category });
-      res.status(200).json(products);
-  } catch (err) {
-      res.status(500).json({ message: 'Error fetching products', error: err.message });
-  }
-};
